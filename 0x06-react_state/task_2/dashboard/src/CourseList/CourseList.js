@@ -1,12 +1,12 @@
 import React from "react";
 import CourseListRow from "./CourseListRow";
-import CourseShape from "./CourseShape";
 import PropTypes from "prop-types";
+import CourseShape from "./CourseShape";
 import { StyleSheet, css } from "aphrodite";
 
-const CourseList = ({ listCourses }) => {
+function CourseList({ listCourses }) {
   return (
-    <table id="CourseList" cellSpacing="0" className={css(styles.table)}>
+    <table id="CourseList" className={css(styles.list)}>
       <thead>
         <CourseListRow textFirstCell="Available courses" isHeader={true} />
         <CourseListRow
@@ -16,25 +16,25 @@ const CourseList = ({ listCourses }) => {
         />
       </thead>
       <tbody>
-        {listCourses.length ? (
-          listCourses.map(({ id, name, credit }) => (
-            <CourseListRow
-              key={id}
-              textFirstCell={name}
-              textSecondCell={credit}
-            />
-          ))
-        ) : (
-          <tr>
-            <td colSpan="2" clasName={css(styles.cell)}>
-              No course available yet
-            </td>
-          </tr>
+        {listCourses.length === 0 && (
+          <CourseListRow
+            textFirstCell="No course available yet"
+            isHeader={false}
+          />
         )}
+
+        {listCourses.map((course) => (
+          <CourseListRow
+            key={course.id}
+            textFirstCell={course.name}
+            textSecondCell={course.credit}
+            isHeader={false}
+          />
+        ))}
       </tbody>
     </table>
   );
-};
+}
 
 CourseList.defaultProps = {
   listCourses: [],
@@ -44,16 +44,16 @@ CourseList.propTypes = {
   listCourses: PropTypes.arrayOf(CourseShape),
 };
 
+const cssVars = {
+  borderTableColor: "rgb(170, 170, 170);",
+};
+
 const styles = StyleSheet.create({
-  table: {
-    width: "100%",
-  },
-  "table-header": {
-    textAlign: "center",
-  },
-  cell: {
-    padding: "0.25rem",
-    border: "1px solid lightgray",
+  list: {
+    border: `1px solid ${cssVars.borderTableColor}`,
+    borderCollapse: "collapse",
+    width: "95%",
+    margin: "40px auto 0 auto",
   },
 });
 

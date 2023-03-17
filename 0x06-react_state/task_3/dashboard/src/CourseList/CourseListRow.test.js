@@ -1,24 +1,30 @@
-import React from "react";
 import { shallow } from "enzyme";
+import React from "react";
 import CourseListRow from "./CourseListRow";
+import { StyleSheetTestUtils } from "aphrodite";
 
 describe("<CourseListRow />", () => {
-  it("renders without crashing", () => {
-    const wrapper = shallow(<CourseListRow textFirstCell="test" />);
-    expect(wrapper.exists());
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
   });
-
-  it("renders one cell", () => {
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+  it("CourseListRow renders without crashing", () => {
+    const wrapper = shallow(<CourseListRow textFirstCell="test" />);
+    expect(wrapper.exists()).toEqual(true);
+  });
+  it("When isHeader is true renders one cell with colspan = 2 when textSecondCell does not exist", () => {
     const wrapper = shallow(
       <CourseListRow isHeader={true} textFirstCell="test" />
     );
     wrapper.update();
-    const element = wrapper.find("th");
-    expect(element).to.heve.length(1);
-    expect(element.prop("colSpan")).to.equal("2");
-  });
+    const item = wrapper.find("th");
 
-  it("renders two cells", () => {
+    expect(item).toHaveLength(1);
+    expect(item.prop("colSpan")).toEqual("2");
+  });
+  it("When isHeader is true renders two cells when textSecondCell is present", () => {
     const wrapper = shallow(
       <CourseListRow
         isHeader={true}
@@ -27,13 +33,13 @@ describe("<CourseListRow />", () => {
       />
     );
     wrapper.update();
-    const element = wrapper.find("th");
-    expect(element).to.heve.length(2);
-    expect(element.first().text()).to.equal("test");
-    expect(element.at(1).text()).to.equal("second");
-  });
+    const item = wrapper.find("th");
 
-  it("renders two td", () => {
+    expect(item).toHaveLength(2);
+    expect(item.first().text()).toEqual("test");
+    expect(item.at(1).text()).toEqual("second");
+  });
+  it("When isHeader is false renders correctly two td elements within a tr element", () => {
     const wrapper = shallow(
       <CourseListRow
         isHeader={false}
@@ -42,8 +48,9 @@ describe("<CourseListRow />", () => {
       />
     );
     wrapper.update();
-    const element = wrapper.find("tr");
-    expect(element).to.heve.length(1);
-    expect(element.children("td")).to.heve.length(2);
+    const item = wrapper.find("tr");
+
+    expect(item).toHaveLength(1);
+    expect(item.children("td")).toHaveLength(2);
   });
 });

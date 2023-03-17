@@ -3,56 +3,41 @@ import { StyleSheet, css } from "aphrodite";
 
 function Login() {
   return (
-    <body role="main" className={css(styles.login)}>
+    <div className={css(styles.login)}>
       <p>Login to access the full dashboard</p>
-
-      <label htmlFor="email"> Email: </label>
-      <input className={css(styles.inp)} type="email" name="email" id="email" />
-
-      <label htmlFor="password"> Password: </label>
-      <input
-        className={css(styles.inp)}
-        id="password"
-        name="password"
-        type="password"
-      />
-
-      <button className={css(styles.button)}>OK</button>
-    </body>
+      <label htmlFor="email">Email:</label>
+      <input type="email" id="email" className={css(styles.loginInput)} />
+      <label htmlFor="password">Password:</label>
+      <input type="password" id="password" className={css(styles.loginInput)} />
+      <button>OK</button>
+    </div>
   );
 }
 
-Login.displayName = "Login";
-
 const screenSize = {
-  small: "@media (max-width: 900px)",
+  small: "@media screen and (max-width: 900px)",
 };
 
 const styles = StyleSheet.create({
   login: {
-    padding: "16px 24px",
+    margin: "50px",
+    flexGrow: 1,
     [screenSize.small]: {
-      width: "90%",
-      padding: 0,
+      marginTop: "10px",
+      marginLeft: 0,
+      marginRight: 0,
+      marginBottom: 0,
     },
   },
 
-  inp: {
-    margin: "4px",
+  loginInput: {
+    marginLeft: "10px",
+    marginRight: "20px",
     [screenSize.small]: {
       display: "block",
-      border: "none",
-      margin: 0,
-    },
-  },
-
-  button: {
-    margin: "0 2rem",
-    cursor: "pointer",
-    [screenSize.small]: {
-      width: "32px",
-      display: "block",
-      margin: 0,
+      marginLeft: 0,
+      marginTop: "10px",
+      marginBottom: "10px",
     },
   },
 });

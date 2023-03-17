@@ -1,79 +1,80 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, css } from "aphrodite";
 
-class NotificationItem extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const { type, html, value, markAsRead, id } = this.props;
-    let li_Item;
-    const color = css(type === "urgent" ? styles.urgent : styles.default);
+const NotificationItem = React.memo(function NotificationItem({
+  type,
+  value,
+  html,
+  markAsRead,
+  id,
+}) {
+  let listItem;
 
-    value
-      ? (li_Item = (
-          <li
-            className={color}
-            data-notification-type={type}
-            onClick={() => markAsRead(id)}
-          >
-            {value}
-          </li>
-        ))
-      : (li_Item = (
-          <li
-            className={color}
-            data-notification-type={type}
-            dangerouslySetInnerHTML={html}
-            onClick={() => markAsRead(id)}
-          ></li>
-        ));
+  let typeStyle = css(type === "urgent" ? styles.urgent : styles.default);
 
-    return li_Item;
+  if (value) {
+    listItem = (
+      <li
+        className={typeStyle}
+        data-notification-type={type}
+        onClick={() => markAsRead(id)}
+      >
+        {value}
+      </li>
+    );
+  } else {
+    listItem = (
+      <li
+        className={typeStyle}
+        data-notification-type={type}
+        dangerouslySetInnerHTML={html}
+        onClick={() => markAsRead(id)}
+      ></li>
+    );
   }
-}
+
+  return listItem;
+});
 
 NotificationItem.defaultProps = {
   type: "default",
-  html: {},
   value: "",
+  html: {},
   markAsRead: () => {},
   id: NaN,
 };
 
 NotificationItem.propTypes = {
   type: PropTypes.string,
+  value: PropTypes.string,
   html: PropTypes.shape({
     __html: PropTypes.string,
   }),
-  value: PropTypes.string,
   markAsRead: PropTypes.func,
   id: PropTypes.number,
 };
 
 const screenSize = {
-  small: "@media (max-width: 900px)",
+  small: "@media screen and (max-width: 900px)",
+};
+
+const listItemSmall = {
+  listStyle: "none",
+  borderBottom: "1px solid black",
+  padding: "10px 8px",
+  fontSize: "20px",
 };
 
 const styles = StyleSheet.create({
   default: {
     color: "blue",
-    [screenSize.small]: {
-      fontSize: "20px",
-      padding: "10px 8px",
-      borderBottom: "1px solid black",
-      listStyle: "none",
-    },
+    [screenSize.small]: listItemSmall,
   },
+
   urgent: {
     color: "red",
-    [screenSize.small]: {
-      fontSize: "20px",
-      padding: "10px 8px",
-      borderBottom: "1px solid black",
-      listStyle: "none",
-    },
+    [screenSize.small]: listItemSmall,
   },
 });
 

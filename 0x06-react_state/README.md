@@ -6,7 +6,7 @@
 * Altogether:         0.0%* Mandatory: 0.0%
 * Optional: no optional tasks
 
- ![](https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2019/12/f316c008fc6a791bf403.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20230309%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20230309T235105Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=ef4edfb91c41ae31ce47d5f4a857a5e762b48e226534ca34163605cb3ec0f3c2) 
+ ![](https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2019/12/f316c008fc6a791bf403.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20230317%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20230317T174344Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=46c825ffdd612b65d42d0899752b068d7d157e018b1c1d453442896b4f227889) 
 
 ## Resources
 Read or watch :

@@ -10,25 +10,32 @@ class BodySectionWithMarginBottom extends Component {
 
   render() {
     return (
-      <div className={css(styles.margin)}>
+      <div className={css(styles.bodySectionWithMargin)}>
         <BodySection {...this.props} />
       </div>
     );
   }
 }
 
-BodySectionWithMarginBottom.propTypes = {
-  title: PropTypes.string,
-};
-
 BodySectionWithMarginBottom.defaultProps = {
   title: "",
 };
 
+BodySectionWithMarginBottom.propTypes = {
+  title: PropTypes.string,
+};
+
+const screenSize = {
+  small: "@media screen and (max-width: 900px)",
+};
+
 const styles = StyleSheet.create({
-  margin: {
+  bodySectionWithMargin: {
     marginBottom: "40px",
     width: "100%",
+    [screenSize.small]: {
+      marginBottom: "10px",
+    },
   },
 });
 
